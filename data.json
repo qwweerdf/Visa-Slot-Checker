@@ -1,0 +1,7 @@
+{
+    "cookie": "<your_cookie>",
+    "scheduleID": "<your_schedule_id>",
+    "expectedDate": "2022-07-29",
+    "notiSoundPath": "./noti.mp3",
+    "sleep": 5
+}
