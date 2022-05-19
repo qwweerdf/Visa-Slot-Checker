@@ -41,6 +41,17 @@ def execute():
                 'Connection': 'keep-alive',
                 'Host': 'ais.usvisa-info.com',
                 'Upgrade-Insecure-Requests': '1',
+                # 如果输出错误/HTML代码，可能是User-Agent的问题。
+                # User-Agent 根据不同的系统而不同，我用的是MacOS的User-Agent。
+                # 如果在Windows运行，通常用：
+                # Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                # Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                # Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                # 这三个都可以。
+                # 如果是MacOS，以下有几个通常用的例子：
+                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
+                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
                               'Chrome/101.0.4951.64 Safari/537.36 '
             }
