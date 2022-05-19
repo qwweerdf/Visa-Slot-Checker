@@ -83,7 +83,7 @@ def execute():
             print('London:')
             if len(londonResponse.text) == 2:
                 print("呜呜呜伦敦slot都没有啦")
-            elif earliestLondon == "Your sessi":
+            elif earliestLondon == "Your sessi" or earliestLondon == "You need t":
                 inputCookie()
             elif earliestLondon < expectedDate:
                 print('！！可预定！！London 最早可预定时间: ' + earliestLondon)
@@ -98,7 +98,7 @@ def execute():
             print('Belfast:')
             if len(belfastResponse.text) == 2:
                 print("呜呜呜贝法slot都没有啦\n")
-            elif earliestLondon == "Your sessi":
+            elif earliestBelfast == "Your sessi" or earliestBelfast == "You need t":
                 inputCookie()
             elif earliestBelfast < expectedDate:
                 print('！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast)
