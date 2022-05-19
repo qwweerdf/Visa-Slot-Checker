@@ -10,6 +10,16 @@ from playsound import playsound
 # 请勿用此程序提交恶意请求，本程序仅供学习使用，对于使用者的任何行为和造成的后果本作者不承担任何法律责任！
 # 祝大家能够抢到自己心仪的的slot！
 
+def inputCookie():
+    newCookie = input("会话过期了/发生了一些错误，请输入新的Cookie值：")
+    with open('data.json', 'r') as updatedDataFile:
+        updateData = json.load(updatedDataFile)
+    updateData['cookie'] = newCookie
+    with open('data.json', 'w') as changedDatafile:
+        json.dump(updateData, changedDatafile, indent=4)
+    execute()
+
+
 def execute():
     counter = 0
 
@@ -73,6 +83,8 @@ def execute():
             print('London:')
             if len(londonResponse.text) == 2:
                 print("呜呜呜伦敦slot都没有啦")
+            elif earliestLondon == "Your sessi":
+                inputCookie()
             elif earliestLondon < expectedDate:
                 print('！！可预定！！London 最早可预定时间: ' + earliestLondon)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment')
@@ -86,6 +98,8 @@ def execute():
             print('Belfast:')
             if len(belfastResponse.text) == 2:
                 print("呜呜呜贝法slot都没有啦\n")
+            elif earliestLondon == "Your sessi":
+                inputCookie()
             elif earliestBelfast < expectedDate:
                 print('！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment' + '\n')
@@ -115,13 +129,7 @@ def execute():
         # catch errors and update json file
         # 如果一些不可预测的bug发生了或者session过期了，用户可以手动输入session值。
         except:
-            newCookie = input("会话过期了/发生了一些错误，请输入新的Cookie值：")
-            with open('data.json', 'r') as updatedDataFile:
-                updateData = json.load(updatedDataFile)
-            updateData['cookie'] = newCookie
-            with open('data.json', 'w') as changedDatafile:
-                json.dump(updateData, changedDatafile, indent=4)
-            execute()
+            inputCookie()
 
 
 # 主函数
