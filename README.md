@@ -55,7 +55,7 @@ python main.py
 
 ## Windows可执行文件（懒人/小白）
 
-如果大家还是不会配置环境，大家可以在Windows系统中，解压zip文件（可以在右边的release里面找到），确保data.json，main.exe和noti.mp3在同一目录下。直接双击执行main.exe文件。
+如果大家还是不会配置环境，大家可以在Windows系统中，解压zip文件（可以在右边的release里面找到），确保data.json，main.exe和noti.mp3在同一目录下。在配置完data.json之后直接双击执行main.exe文件。
 
 ## 已知可能出现的问题 
 
