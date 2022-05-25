@@ -82,7 +82,3 @@ python main.py
 > Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
 > 
 > Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
-
-2. Windows可执行文件
-
-> 在执行main.exe文件之后系统可能会出现延迟。在这种情况下，大家可以把sleep时间改为0以减少延迟时间。
