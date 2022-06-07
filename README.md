@@ -82,3 +82,7 @@ python main.py
 > Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
 > 
 > Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
+> 
+> 如果以上的例子乱码还会出现，那么就可以按照以下方法做：
+> 
+> 在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在main.py里面把user-agent的值删除然后粘贴即可。
