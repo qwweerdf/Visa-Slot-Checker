@@ -37,6 +37,12 @@ cookie可以在登录之后的任何请求中获取。
 
 程序睡眠时间：少于5秒可能会造成TooManyRequests Error,建议sleep时间>=5秒。
 
+#### 6.user-agent
+
+每个人的电脑因为系统浏览器版本和配置都不同，所以每个人的user-agent也不相同，具体的获取方法如下：
+
+在Chrome/Firefox/Edge浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在main.py里面把user-agent的值删除然后粘贴即可。
+
 ### 3.运行程序
 
 ```shell
@@ -62,8 +68,7 @@ python main.py
 1. User-Agent错误识别
 
 > 如果输出错误/HTML代码，可能是User-Agent的问题。
-> 
-> User-Agent 根据不同的系统而不同，我用的是MacOS的User-Agent。
+>
 > 
 > 如果在Windows运行，通常用：
 > 
@@ -82,7 +87,7 @@ python main.py
 > Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
 > 
 > Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
-> 
 > 如果以上的例子乱码还会出现，那么就可以按照以下方法做：
 > 
 > 在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在main.py里面把user-agent的值删除然后粘贴即可。
+
