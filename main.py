@@ -38,6 +38,8 @@ def execute():
         notiSoundPath = data['notiSoundPath']
         # sleep时间，单位秒数
         sleepTime = data['sleep']
+        # user-agent
+        userAgent = data['user-agent']
 
         try:
             # construct headers (DO NOT MODIFY THESE REQUEST HEADERS IF YOU DON'T FAMILIAR WITH HTTP REQUEST 请勿随意修改请求头)
@@ -62,8 +64,11 @@ def execute():
                 # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
                 # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
                 # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
-                              'Chrome/101.0.4951.64 Safari/537.36 '
+                #
+                # 如果以上的例子乱码还会出现，那么就可以按照以下方法做：
+                # 在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request
+                # header里面的user - agent右键复制。然后在main.py里面把user - agent的值删除然后粘贴即可。
+                'User-Agent': userAgent
             }
 
             londonSession = requests.Session()

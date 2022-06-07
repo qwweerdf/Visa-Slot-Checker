@@ -1,7 +1,8 @@
 {
-    "cookie": "<your_cookie>",
-    "scheduleID": "<your_schedule_id>",
-    "expectedDate": "2022-07-29",
+    "cookie": "<your cookie> 详情请看README",
+    "scheduleID": "<your schedule id 详情请看README>",
+    "expectedDate": "2022-07-30",
     "notiSoundPath": "./noti.mp3",
-    "sleep": 5
+    "sleep": 5,
+    "user-agent": "<your User-Agent 详情请看README>"
 }
