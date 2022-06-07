@@ -1,5 +1,5 @@
 {
-    "cookie": "<your cookie> 详情请看README",
+    "cookie": "<your cookie 详情请看README>",
     "scheduleID": "<your schedule id 详情请看README>",
     "expectedDate": "2022-07-30",
     "notiSoundPath": "./noti.mp3",
