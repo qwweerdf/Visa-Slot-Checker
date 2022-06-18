@@ -1,6 +1,10 @@
 # 使用教程
 
-## 1. 确保已经安装python3 & pip
+## 1. 确保已经安装python3 & pip3
+
+python下载安装: https://www.python.org/downloads/ ,并且确保python已经加到环境变量中。
+
+pip下载安装: https://pip.pypa.io/en/stable/installation/#get-pip-py 
 
 ## 2. 下载此项目
 
@@ -41,7 +45,7 @@ cookie可以在登录之后的任何请求中获取。
 
 每个人的电脑因为系统浏览器版本和配置都不同，所以每个人的user-agent也不相同，具体的获取方法如下：
 
-在Chrome/Firefox/Edge浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在main.py里面把user-agent的值删除然后粘贴即可。
+在Chrome/Firefox/Edge浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在data.json里面把user-agent的值删除然后粘贴即可。
 
 ### 3.运行程序
 
@@ -58,6 +62,10 @@ python main.py
 请勿用此程序提交恶意请求，本程序仅供学习使用，对于使用者的任何行为和造成的后果本作者不承担任何法律责任！
 
 # 额外信息
+
+## 后续操作
+
+配置完成并且能够正常运行之后之后，在每次刷的时候只需要粘贴cookie到data.json保存运行main.py即可。
 
 ## Windows可执行文件（懒人/小白）
 
@@ -91,3 +99,24 @@ python main.py
 > 
 > 在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在main.py里面把user-agent的值删除然后粘贴即可。
 
+# FAQs
+
+### 1. 能否刷除了英国意外其他国家？
+
+> 懂的小伙伴可以手动更改请求链接以及请求的城市代码并且配置好请求头的参数，只要官网是 ais.usvisa-info.com 道理都差不多。
+
+### 2. 为什么出现乱码？
+
+> 可能是请求头中user-agent的问题，请看填写JSON配置文件部分。请注意有些引号例如" "或者' '请勿删除！
+
+### 3. data.json文件中的<>是否需要删除？
+
+> 是的，data.json的cookie，scheduleID和user-agent都需要把<>删掉然后粘贴值到" "里面。
+
+### 4. 程序会侵犯我的隐私吗？
+
+> 所有的个人敏感信息都是需要在下载到本地进行配置的，本程序只是根据你的信息模仿你的浏览器发送http请求来刷新验证slot，不会窃取你的任何个人信息。
+
+# 需要更多帮助？
+
+电子邮箱：1563470117@qq.com
