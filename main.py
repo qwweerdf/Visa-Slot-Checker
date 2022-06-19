@@ -84,12 +84,9 @@ def login(email, password):
 
 # 发生错误可以手动输入cookie
 def inputCookie():
-    newCookie = input("会话过期了/发生了一些错误，请输入新的Cookie值：")
-    with open('data.json', 'r') as updatedDataFile:
-        updateData = json.load(updatedDataFile)
-    updateData['cookie'] = newCookie
-    with open('data.json', 'w') as changedDatafile:
-        json.dump(updateData, changedDatafile, indent=4)
+    print('会话过期或者发生了一些错误，5秒后重试。。。')
+    time.sleep(5)
+
     execute()
 
 
