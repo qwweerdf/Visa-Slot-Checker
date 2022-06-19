@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```
 ### 2.填写JSON配置文件
 
-#### 1.邮箱地址 & 密码
+#### 1.email & password
 
 填写你的邮箱地址和密码。
 
