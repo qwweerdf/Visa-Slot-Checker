@@ -2,7 +2,7 @@ import requests
 import time
 import json
 from playsound import playsound
-import bs4
+from bs4 import BeautifulSoup
 
 
 # 本程序为美签slot查询(英国：伦敦，贝尔法斯特)，可以根据期望的日期和刷新频率来刷新美签slot(英国：伦敦，贝尔法斯特)。
@@ -70,6 +70,7 @@ def login(email, password):
 
     loginResponse = loginSession.post('https://ais.usvisa-info.com/en-gb/niv/users/sign_in', headers=headers,
                                       data=payload)
+
     loginSessionName = ''
     loginSessionValue = ''
 
@@ -213,5 +214,4 @@ def execute():
 
 # 主函数
 if __name__ == '__main__':
-    # execute()
-    print(bs4.__version__)
+    execute()
