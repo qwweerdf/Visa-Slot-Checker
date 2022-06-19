@@ -19,11 +19,9 @@ pip install -r requirements.txt
 ```
 ### 2.填写JSON配置文件
 
-#### 1.cookie
+#### 1.邮箱地址 & 密码
 
-cookie可以在登录之后的任何请求中获取。
-
-例如：在reschedule界面按F12然后点击刷新，在第一个appointment请求中的请求/响应头找Cookie，右键复制即cookie。
+填写你的邮箱地址和密码。
 
 #### 2.scheduleID
 
@@ -65,7 +63,7 @@ python main.py
 
 ## 后续操作
 
-配置完成并且能够正常运行之后之后，在每次刷的时候只需要粘贴cookie到data.json保存运行main.py即可。
+配置完成并且能够正常运行之后之后，每次只需运行程序即可 -> python main.py。
 
 ## Windows可执行文件（懒人/小白）
 
@@ -111,7 +109,7 @@ python main.py
 
 ### 3. data.json文件中的<>是否需要删除？
 
-> 是的，data.json的cookie，scheduleID和user-agent都需要把<>删掉然后粘贴值到" "里面。
+> 是的，data.json的email, password，scheduleID和user-agent都需要把<>删掉然后粘贴值到" "里面。
 
 ### 4. 程序会侵犯我的隐私吗？
 

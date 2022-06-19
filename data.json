@@ -1,5 +1,6 @@
 {
-    "cookie": "<your cookie 详情请看README>",
+    "email": "<your email address>",
+    "password": "<your password>",
     "scheduleID": "<your schedule id 详情请看README>",
     "expectedDate": "2022-07-30",
     "notiSoundPath": "./noti.mp3",
