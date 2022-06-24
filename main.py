@@ -4,12 +4,14 @@ import json
 from playsound import playsound
 from bs4 import BeautifulSoup
 
+"""
+本程序为美签slot查询(英国：伦敦，贝尔法斯特)，可以根据期望的日期和刷新频率来刷新美签slot(英国：伦敦，贝尔法斯特)。
+本程序仅限英国美签slot查询，大家也可以照猫画虎修改成自己所在的国家美签申请中心。
+作者Java刚转Python 1周，写个爬虫试试水。代码方面不够简洁，请谅解！
+请勿用此程序提交恶意请求，本程序仅供学习使用，对于使用者的任何行为和造成的后果本作者不承担任何法律责任！
+祝大家能够抢到自己心仪的的slot！
+"""
 
-# 本程序为美签slot查询(英国：伦敦，贝尔法斯特)，可以根据期望的日期和刷新频率来刷新美签slot(英国：伦敦，贝尔法斯特)。
-# 本程序仅限英国美签slot查询，大家也可以照猫画虎修改成自己所在的国家美签申请中心。
-# 作者Java刚转Python 1周，写个爬虫试试水。代码方面不够简洁，请谅解！
-# 请勿用此程序提交恶意请求，本程序仅供学习使用，对于使用者的任何行为和造成的后果本作者不承担任何法律责任！
-# 祝大家能够抢到自己心仪的的slot！
 
 # authToken non-login session are needed for further login processes.(authToken和未登录时的session获取，为登录作准备)
 def getInfo():
@@ -52,6 +54,7 @@ def login(email, password):
         'authenticity_token': authToken
     }
 
+    # 请请求头尽可能模拟浏览器
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'Accept-Encoding': 'gzip, deflate, br',
@@ -82,8 +85,8 @@ def login(email, password):
     return loginSessionName + "=" + loginSessionValue
 
 
-# 发生错误可以手动输入cookie
-def inputCookie():
+# 发生错误并重试
+def retry():
     print('会话过期或者发生了一些错误，5秒后重试。。。')
     time.sleep(5)
 
@@ -117,6 +120,7 @@ def execute():
     while True:
 
         try:
+            # 请请求头尽可能模拟浏览器
             # construct headers (DO NOT MODIFY THESE REQUEST HEADERS IF YOU DON'T FAMILIAR WITH HTTP REQUEST 请勿随意修改请求头)
             headers = {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,'
@@ -128,21 +132,24 @@ def execute():
                 'Connection': 'keep-alive',
                 'Host': 'ais.usvisa-info.com',
                 'Upgrade-Insecure-Requests': '1',
-                # 如果输出错误/HTML代码，可能是User-Agent的问题。
-                # User-Agent 根据不同的系统而不同，我用的是MacOS的User-Agent。
-                # 如果在Windows运行，通常用：
-                # Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
-                # Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
-                # Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
-                # 这三个都可以。
-                # 如果是MacOS，以下有几个通常用的例子：
-                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
-                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
-                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
-                #
-                # 如果以上的例子乱码还会出现，那么就可以按照以下方法做：
-                # 在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request
-                # header里面的user - agent右键复制。然后在main.py里面把user - agent的值删除然后粘贴即可。
+
+                """
+                如果输出错误/HTML代码，可能是User-Agent的问题。
+                User-Agent 根据不同的系统而不同，我用的是MacOS的User-Agent。
+                如果在Windows运行，通常用：
+                Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                这三个都可以。
+                如果是MacOS，以下有几个通常用的例子：
+                Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+                Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
+                Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
+                
+                如果以上的例子乱码还会出现，那么就可以按照以下方法做：
+                在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request
+                header里面的user - agent右键复制。然后在main.py里面把user - agent的值删除然后粘贴即可。
+                """
                 'User-Agent': userAgent
             }
 
@@ -164,7 +171,7 @@ def execute():
             if len(londonResponse.text) == 2:
                 print("呜呜呜伦敦slot都没有啦")
             elif earliestLondon == "Your sessi" or earliestLondon == "You need t":
-                inputCookie()
+                retry()
             elif earliestLondon < expectedDate:
                 print('！！可预定！！London 最早可预定时间: ' + earliestLondon)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment')
@@ -179,7 +186,7 @@ def execute():
             if len(belfastResponse.text) == 2:
                 print("呜呜呜贝法slot都没有啦\n")
             elif earliestBelfast == "Your sessi" or earliestBelfast == "You need t":
-                inputCookie()
+                retry()
             elif earliestBelfast < expectedDate:
                 print('！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment' + '\n')
@@ -192,7 +199,7 @@ def execute():
             # refresh cookie and store to JSON file
             # 循环counter次后更新session以保持登录状态，这里可以改刷新频率。但是请注意经过测试session过期时间大概为30分钟，刷新频率最好不要大于30min/次
             counter = counter + 1
-            if counter == 10:
+            if counter == 3:
                 londonCookie = londonResponse.cookies
                 newLondonCookiePart = json.dumps(requests.utils.dict_from_cookiejar(londonCookie)).split("\"")[3]
                 newLondonCookie = "_yatri_session=" + newLondonCookiePart
@@ -203,10 +210,10 @@ def execute():
             # sleep time (少于5秒可能会造成TooManyRequests Error,建议sleep时间>=5秒)
             time.sleep(sleepTime)
 
-        # catch errors and update json file
-        # 如果一些不可预测的bug发生了或者session过期了，用户可以手动输入session值。
+        # catch errors and retry
+        # 如果一些不可预测的bug发生,隔5秒重试。
         except:
-            inputCookie()
+            retry()
 
 
 # 主函数
