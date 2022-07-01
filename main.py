@@ -4,13 +4,12 @@ import json
 from playsound import playsound
 from bs4 import BeautifulSoup
 
-"""
-本程序为美签slot查询(英国：伦敦，贝尔法斯特)，可以根据期望的日期和刷新频率来刷新美签slot(英国：伦敦，贝尔法斯特)。
-本程序仅限英国美签slot查询，大家也可以照猫画虎修改成自己所在的国家美签申请中心。
-作者Java刚转Python 1周，写个爬虫试试水。代码方面不够简洁，请谅解！
-请勿用此程序提交恶意请求，本程序仅供学习使用，对于使用者的任何行为和造成的后果本作者不承担任何法律责任！
-祝大家能够抢到自己心仪的的slot！
-"""
+
+# 本程序为美签slot查询(英国：伦敦，贝尔法斯特)，可以根据期望的日期和刷新频率来刷新美签slot(英国：伦敦，贝尔法斯特)。
+# 本程序仅限英国美签slot查询，大家也可以照猫画虎修改成自己所在的国家美签申请中心。
+# 作者Java刚转Python 1周，写个爬虫试试水。代码方面不够简洁，请谅解！
+# 请勿用此程序提交恶意请求，本程序仅供学习使用，对于使用者的任何行为和造成的后果本作者不承担任何法律责任！
+# 祝大家能够抢到自己心仪的的slot！
 
 
 # authToken non-login session are needed for further login processes.(authToken和未登录时的session获取，为登录作准备)
@@ -133,23 +132,22 @@ def execute():
                 'Host': 'ais.usvisa-info.com',
                 'Upgrade-Insecure-Requests': '1',
 
-                """
-                如果输出错误/HTML代码，可能是User-Agent的问题。
-                User-Agent 根据不同的系统而不同，我用的是MacOS的User-Agent。
-                如果在Windows运行，通常用：
-                Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
-                Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
-                Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
-                这三个都可以。
-                如果是MacOS，以下有几个通常用的例子：
-                Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
-                Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
-                Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
-                
-                如果以上的例子乱码还会出现，那么就可以按照以下方法做：
-                在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request
-                header里面的user - agent右键复制。然后在main.py里面把user - agent的值删除然后粘贴即可。
-                """
+                # 如果输出错误/HTML代码，可能是User-Agent的问题。
+                # User-Agent 根据不同的系统而不同，我用的是MacOS的User-Agent。
+                # 如果在Windows运行，通常用：
+                # Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                # Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                # Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+                # 这三个都可以。
+                # 如果是MacOS，以下有几个通常用的例子：
+                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
+                # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
+                #
+                # 如果以上的例子乱码还会出现，那么就可以按照以下方法做：
+                # 在浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request
+                # header里面的user - agent右键复制。然后在main.py里面把user - agent的值删除然后粘贴即可。
+
                 'User-Agent': userAgent
             }
 
