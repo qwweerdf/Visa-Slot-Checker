@@ -86,7 +86,7 @@ def login(email, password):
 
 # 发生错误并重试
 def retry():
-    print('会话过期或者发生了一些错误，5秒后重试。。。')
+    print('发生了一些错误或者会话过期，5秒后重试。。。')
     time.sleep(5)
 
     execute()
@@ -170,34 +170,38 @@ def execute():
                 print("呜呜呜伦敦slot都没有啦")
             elif earliestLondon == "Your sessi" or earliestLondon == "You need t":
                 retry()
-            elif earliestLondon < expectedDate:
+            elif earliestLondon > expectedDate:
+                print('可预定但超过期望时间：' + earliestLondon)
+                print('链接: ' + 'https://ais.usvisa-info.com/en-egb/niv/schedule/' + scheduleID + '/appointment')
+            elif earliestLondon <= expectedDate:
                 print('！！可预定！！London 最早可预定时间: ' + earliestLondon)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment')
                 playsound(notiSoundPath)
             else:
-                print('可预定但超过期望时间：' + earliestLondon)
-                print('链接: ' + 'https://ais.usvisa-info.com/en-egb/niv/schedule/' + scheduleID + '/appointment')
+                retry()
 
             # belfast slot check
             earliestBelfast = belfastResponse.text[10:20]
             print('Belfast:')
             if len(belfastResponse.text) == 2:
                 print("呜呜呜贝法slot都没有啦\n")
-            elif earliestBelfast == "Your sessi" or earliestBelfast == "You need t":
+            elif earliestLondon == "Your sessi" or earliestLondon == "You need t":
                 retry()
-            elif earliestBelfast < expectedDate:
+            elif earliestBelfast > expectedDate:
+                print('可预定但超过期望时间：' + earliestBelfast)
+                print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment' + '\n')
+            elif earliestBelfast <= expectedDate:
                 print('！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment' + '\n')
                 # 播放声音，大家也可以删掉/改变播放声音部分如果不喜欢
                 playsound(notiSoundPath)
             else:
-                print('可预定但超过期望时间：' + earliestBelfast)
-                print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment' + '\n')
+                retry()
 
             # refresh cookie and store to JSON file
             # 循环counter次后更新session以保持登录状态，这里可以改刷新频率。但是请注意经过测试session过期时间大概为30分钟，刷新频率最好不要大于30min/次
             counter = counter + 1
-            if counter == 3:
+            if counter == 10:
                 londonCookie = londonResponse.cookies
                 newLondonCookiePart = json.dumps(requests.utils.dict_from_cookiejar(londonCookie)).split("\"")[3]
                 newLondonCookie = "_yatri_session=" + newLondonCookiePart
@@ -207,10 +211,10 @@ def execute():
 
             # sleep time (少于5秒可能会造成TooManyRequests Error,建议sleep时间>=5秒)
             time.sleep(sleepTime)
-
         # catch errors and retry
         # 如果一些不可预测的bug发生,隔5秒重试。
-        except:
+        except Exception:
+            traceback.print_exc()
             retry()
 
 
