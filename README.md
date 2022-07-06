@@ -43,7 +43,9 @@ pip install -r requirements.txt
 
 每个人的电脑因为系统浏览器版本和配置都不同，所以每个人的user-agent也不相同，具体的获取方法如下：
 
-在Chrome/Firefox/Edge浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在data.json里面把user-agent的值删除然后粘贴即可。
+方法一：访问 http://whatsmyuseragent.org/ 复制粘贴第一个框的内容到data.json里面的user-agent的值里面即可。
+
+方法二：在Chrome/Firefox/Edge浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在data.json里面把user-agent的值删除然后粘贴即可。
 
 ### 3.运行程序
 
@@ -65,9 +67,9 @@ python main.py
 
 配置完成并且能够正常运行之后之后，每次只需运行程序即可 -> python main.py。
 
-## Windows可执行文件（懒人/小白）
+## Windows可执行文件（过时，需要cookie）
 
-如果大家还是不会配置环境，大家可以在Windows系统中，解压zip文件（可以在右边的release里面找到），确保data.json，main.exe和noti.mp3在同一目录下。在配置完data.json之后直接双击执行main.exe文件。
+大家可以在Windows系统中，解压zip文件（可以在右边的release里面找到），确保data.json，main.exe和noti.mp3在同一目录下。在配置完data.json之后直接双击执行main.exe文件。
 
 ## 已知可能出现的问题 
 
