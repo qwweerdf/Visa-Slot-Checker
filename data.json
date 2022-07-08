@@ -6,4 +6,15 @@
     "notiSoundPath": "./noti.mp3",
     "sleep": 5,
     "user-agent": "<your User-Agent 详情请看README>"
+    
+    "mail": 0
+    "smtp_url": ""
+    "smtp_port": 25
+    "smtp_from_address": ""
+    "smtp_to_address": ""
+    "smtp_password": ""
+    "mailGun": 0
+    "mailgun_domain_name": ""
+    "mailgun_api_key": ""
+    "mailgun_to_address": ""
 }
