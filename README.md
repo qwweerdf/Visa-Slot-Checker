@@ -47,6 +47,50 @@ pip install -r requirements.txt
 
 方法二：在Chrome/Firefox/Edge浏览器打开F12切换到network栏，在签证官网刷新页面随便点一个request，下拉看到request header里面的user-agent右键复制。然后在data.json里面把user-agent的值删除然后粘贴即可。
 
+#### 7.playSound
+
+是否播放声音，如果在服务器上运行并开启邮件提醒可关闭声音播放。
+
+#### 8.smtpMailSender
+
+是否开启smtp邮件推送。
+
+##### 8.1.smtp_url
+
+smtp服务器地址
+
+##### 8.2.smtp_port
+
+smtp端口
+
+##### 8.3.smtp_from_address
+
+发送邮件的邮箱
+
+##### 8.4.smtp_to_address
+
+接受邮件的邮箱
+
+##### 8.5.smtp_password
+
+发送邮件的邮箱的密码
+
+#### 9.mailGunSender
+
+是否开启mailgun邮件发送
+
+##### 9.1.mailgun_domain_name
+
+mailgun域名
+
+##### 9.2.mailgun_api_key
+
+mailgun private api key
+
+##### 9.3.mailgun_to_address
+
+接收邮件的地址
+
 ### 3.运行程序
 
 ```shell
