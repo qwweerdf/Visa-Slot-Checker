@@ -91,6 +91,33 @@ def retry():
 
     execute()
 
+# 邮件推送
+def sendMail(mailContent):
+    with open('data.json', 'r') as dataFile:
+        data = json.load(dataFile)
+    smtp = smtplib
+    smtp = smtplib.SMTP()
+    smtp.connect(data['smtp_url'], data['smtp_port'])
+    smtp.login(data['smtp_from_address'], data['smtp_password'])
+    msg = email.mime.multipart.MIMEMultipart()
+    msg['from'] = data['smtp_from_address']
+    msg['subject'] = 'Visa Slot'
+    msg['to'] = data['smtp_to_address']
+    txt=email.mime.text.MIMEText(mailContent,'HTML','utf-8')
+    msg.attach(txt)
+    smtp.sendmail(msg['from'],msg['to'],str(msg))
+
+# 邮件推送
+def mailGun(mailContent):
+    with open('data.json', 'r') as dataFile:
+        data = json.load(dataFile)
+    return requests.post(
+        "https://api.mailgun.net/v3/"+ data['mailgun_domain_name'] +"/messages",
+        auth=('api', mailgun_api_key),
+        data={"from": "船票Get <mailmaster@"+ data['mailgun_domain_name'] +">",
+              "to": [data['mailgun_to_address']],
+              "subject": "Visa Slot",
+              "text": mailContent})
 
 def execute():
     counter = 0
@@ -176,6 +203,11 @@ def execute():
             elif earliestLondon <= expectedDate:
                 print('！！可预定！！London 最早可预定时间: ' + earliestLondon)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment')
+                mailContent = '！！可预定！！London 最早可预定时间: ' + earliestLondon + '\n' + '链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment'
+                if data['mail'] == 1:
+                    sendMail(mailContent)
+                if data['mailGun'] == 1:
+                    mailGun(mailContent)
                 playsound(notiSoundPath)
             else:
                 retry()
@@ -193,6 +225,12 @@ def execute():
             elif earliestBelfast <= expectedDate:
                 print('！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment' + '\n')
+                mailContent = '！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast + '\n' + '链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment'
+                if data['mail'] == 1:
+                    sendMail(mailContent)
+                if data['mailGun'] == 1:
+                    mailGun(mailContent)
+                playsound(notiSoundPath)
                 # 播放声音，大家也可以删掉/改变播放声音部分如果不喜欢
                 playsound(notiSoundPath)
             else:
