@@ -7,11 +7,11 @@
     "sleep": 5,
     "user-agent": "<your User-Agent 详情请看README>",
 
-    "playSound": false,
-    
+    "playSound": true,
+
     "smtpMailSender": false,
     "smtp_url": "<your smtp url>",
-    "smtp_port": 25,
+    "smtp_port": 465,
     "smtp_from_address": "<your smtp from address>",
     "smtp_to_address": "<your mail receive address>",
     "smtp_password": "<your smtp password>",

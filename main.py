@@ -1,11 +1,12 @@
-import requests
-import time
-import json
-from playsound import playsound
-from bs4 import BeautifulSoup
-import smtplib
 import email.mime.multipart
 import email.mime.text
+import json
+import requests
+import smtplib
+import sys
+import time
+from bs4 import BeautifulSoup
+from playsound import playsound
 
 
 # 本程序为美签slot查询(英国：伦敦，贝尔法斯特)，可以根据期望的日期和刷新频率来刷新美签slot(英国：伦敦，贝尔法斯特)。
@@ -94,33 +95,43 @@ def retry():
 
     execute()
 
+
 # 邮件推送
 def sendMail(mailContent):
     with open('data.json', 'r') as dataFile:
         data = json.load(dataFile)
-    smtp = smtplib
+
     smtp = smtplib.SMTP()
-    smtp.connect(data['smtp_url'], data['smtp_port'])
+    if data['smtp_port'] == 25:
+        smtp.connect(data['smtp_url'], 25)
+    elif data['smtp_port'] == 465:
+        smtp = smtplib.SMTP_SSL(data['smtp_url'], 465)
+    else:
+        print('目前只支持端口号为25和465的SMTP协议')
+        sys.exit()
+
     smtp.login(data['smtp_from_address'], data['smtp_password'])
     msg = email.mime.multipart.MIMEMultipart()
     msg['from'] = data['smtp_from_address']
     msg['subject'] = 'US Visa Slot'
     msg['to'] = data['smtp_to_address']
-    txt=email.mime.text.MIMEText(mailContent,'HTML','utf-8')
+    txt = email.mime.text.MIMEText(mailContent, 'HTML', 'utf-8')
     msg.attach(txt)
-    smtp.sendmail(msg['from'],msg['to'],str(msg))
+    smtp.sendmail(msg['from'], msg['to'], str(msg))
+
 
 # Mail gun 邮件推送
 def mailGun(mailContent):
     with open('data.json', 'r') as dataFile:
         data = json.load(dataFile)
     return requests.post(
-        "https://api.mailgun.net/v3/"+ data['mailgun_domain_name'] +"/messages",
+        "https://api.mailgun.net/v3/" + data['mailgun_domain_name'] + "/messages",
         auth=('api', data['mailgun_api_key']),
-        data={"from": "US Visa Slot <mailmaster@"+ data['mailgun_domain_name'] +">",
+        data={"from": "US Visa Slot <mailmaster@" + data['mailgun_domain_name'] + ">",
               "to": [data['mailgun_to_address']],
               "subject": "US Visa Slot",
               "text": mailContent})
+
 
 def execute():
     counter = 0
@@ -142,6 +153,12 @@ def execute():
     sleepTime = data['sleep']
     # user-agent
     userAgent = data['user-agent']
+    # SMTP
+    isSMTP = data['smtpMailSender']
+    # MailGun
+    isMailGun = data['mailGunSender']
+    # play sound
+    isPlaysound = data['playSound']
 
     # 登录
     cookie = login(email, password)
@@ -207,11 +224,11 @@ def execute():
                 print('！！可预定！！London 最早可预定时间: ' + earliestLondon)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment')
                 mailContent = '！！可预定！！London 最早可预定时间: ' + earliestLondon + '\n' + '链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment'
-                if data['smtpMailSender']:
+                if isSMTP:
                     sendMail(mailContent)
-                if data['mailGunSender']:
+                if isMailGun:
                     mailGun(mailContent)
-                if data['playSound']:
+                if isPlaysound:
                     playsound(notiSoundPath)
             else:
                 retry()
@@ -230,12 +247,12 @@ def execute():
                 print('！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast)
                 print('链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment' + '\n')
                 mailContent = '！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast + '\n' + '链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment'
-                if data['smtpMailSender']:
+                if isSMTP:
                     sendMail(mailContent)
-                if data['mailGunSender']:
+                if isMailGun:
                     mailGun(mailContent)
                 # 播放声音，大家也可以删掉/改变播放声音部分如果不喜欢
-                if data['playSound']:
+                if isPlaysound:
                     playsound(notiSoundPath)
             else:
                 retry()
@@ -255,8 +272,10 @@ def execute():
             time.sleep(sleepTime)
         # catch errors and retry
         # 如果一些不可预测的bug发生,隔5秒重试。
-        except Exception:
-            traceback.print_exc()
+        except Exception as e:
+            print('发生错误：')
+            print(e.__class__)
+            print(e)
             retry()
 
 
