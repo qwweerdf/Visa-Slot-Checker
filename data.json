@@ -5,5 +5,19 @@
     "expectedDate": "2022-07-30",
     "notiSoundPath": "./noti.mp3",
     "sleep": 5,
-    "user-agent": "<your User-Agent 详情请看README>"
+    "user-agent": "<your User-Agent 详情请看README>",
+
+    "playSound": false,
+    
+    "smtpMailSender": false,
+    "smtp_url": "<your smtp url>",
+    "smtp_port": 25,
+    "smtp_from_address": "<your smtp from address>",
+    "smtp_to_address": "<your mail receive address>",
+    "smtp_password": "<your smtp password>",
+
+    "mailGunSender": false,
+    "mailgun_domain_name": "<your mailgun domain name>",
+    "mailgun_api_key": "<your mailgun private api key>",
+    "mailgun_to_address": "<your mail receive address>"
 }
