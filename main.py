@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import smtplib
 import email.mime.multipart
 import email.mime.text
+import random
 
 
 # 本程序为美签slot查询(英国：伦敦，贝尔法斯特)，可以根据期望的日期和刷新频率来刷新美签slot(英国：伦敦，贝尔法斯特)。
@@ -139,7 +140,7 @@ def execute():
     # 播放声音提醒有期望的slot。大家也可以删掉/改变播放声音部分/路径如果不喜欢
     notiSoundPath = data['notiSoundPath']
     # sleep时间，单位秒数
-    sleepTime = data['sleep']
+    sleepTime = random.randint(data['sleep'], data['sleep'] + 20)
     # user-agent
     userAgent = data['user-agent']
 
@@ -209,8 +210,10 @@ def execute():
                 mailContent = '！！可预定！！London 最早可预定时间: ' + earliestLondon + '\n' + '链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment'
                 if data['smtpMailSender']:
                     sendMail(mailContent)
+                    break
                 if data['mailGunSender']:
                     mailGun(mailContent)
+                    break
                 if data['playSound']:
                     playsound(notiSoundPath)
             else:
@@ -232,8 +235,10 @@ def execute():
                 mailContent = '！！可预定！！Belfast 最早可预定时间: ' + earliestBelfast + '\n' + '链接: ' + 'https://ais.usvisa-info.com/en-gb/niv/schedule/' + scheduleID + '/appointment'
                 if data['smtpMailSender']:
                     sendMail(mailContent)
+                    break
                 if data['mailGunSender']:
                     mailGun(mailContent)
+                    break
                 # 播放声音，大家也可以删掉/改变播放声音部分如果不喜欢
                 if data['playSound']:
                     playsound(notiSoundPath)
