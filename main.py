@@ -238,7 +238,7 @@ def execute():
             print('Belfast:')
             if len(belfastResponse.text) == 2:
                 print("呜呜呜贝法slot都没有啦\n")
-            elif earliestLondon == "Your sessi" or earliestLondon == "You need t":
+            elif earliestBelfast == "Your sessi" or earliestBelfast == "You need t":
                 retry()
             elif earliestBelfast > expectedDate:
                 print('可预定但超过期望时间：' + earliestBelfast)
